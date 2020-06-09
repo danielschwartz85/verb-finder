@@ -402,15 +402,42 @@
           foundEyes.push({name, actions, found})
         }
       }
-      const notFoundtext = `"${verb}" :לא נמצאו נגזרות עבור הפועל`
+      const notFoundtext = 'לא נמצאו נגזרות ✅'
       buildDervis(foundEyes, notFoundtext)
     }
 
     function fromVerbToVerbList(verb) {
       let cleanVerb = verb.replace(/\s+/g,'')
       cleanVerb = cleanVerb.replace(/\./g, '')
-      const verbArry  = cleanVerb.split('')
-      return perm(verbArry).map(arr => arr.join('.'))
+      const verbArray  = cleanVerb.split('').map(toNonEndLetter)
+      const verbsList = perm(verbArray).map(toEndLetter)
+      return verbsList.map(arr => arr.join('.'))
+    }
+
+    function toEndLetter(verbArray) {
+      const lastIes = {
+        'מ':'ם',
+        'נ':'ן',
+        'צ':'ץ',
+        'פ':'ף',
+        'כ':'ך',
+      }
+      const lastLetter = verbArray[verbArray.length - 1];
+      if (Object.keys(lastIes).includes(lastLetter)) {
+        verbArray[verbArray.length - 1] = lastIes[lastLetter]
+      }
+      return verbArray;
+    }
+
+    function toNonEndLetter(char) {
+      const lastIes = {
+        'ם':'מ',
+        'ן':'נ',
+        'ץ':'צ',
+        'ף':'פ',
+        'ך':'כ',
+      }
+      return lastIes[char] || char
     }
 
     // Returns all the permutations of a given array:
