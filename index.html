@@ -3,7 +3,89 @@
 <head>
   <title>מוצא פעלים</title>
   <link rel="shortcut icon" href="eye.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    /* Form  */
+    #search {
+      width: 320px;
+      margin: 45px auto;
+    }
+    .group {
+      position: relative;
+      margin: 45px 0;
+    }
+    input {
+      background: none;
+      /* color: #c6c6c6; */
+      font-size: 18px;
+      padding: 10px 10px 10px 5px;
+      display: block;
+      width: 300px;
+      border: none;
+      border-radius: 0;
+      border-bottom: 1px solid #c6c6c6;
+    }
+    input:focus {
+      outline: none;
+    }
+    input:focus ~ .bar:before{
+      width: 325px;
+    }
+    .bar {
+      position: relative;
+      display: block;
+      width: 325px;
+    }
+    .bar:before {
+      content: '';
+      height: 2px;
+      width: 0;
+      bottom: 0px;
+      position: absolute;
+      background: #7b22bf;
+      -webkit-transition: 300ms ease all;
+      transition: 300ms ease all;
+      left: 0%;
+    }
+    .btn {
+      background: #fff;
+      color: #959595;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 3px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      outline: none;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      -webkit-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    .btn:hover {
+      color: #8b8b8b;
+      box-shadow: 0 7px 14px rgba(0, 0, 0, 0.18), 0 5px 5px rgba(0, 0, 0, 0.12);
+    }
+    .btn.btn-link {
+      background: #2196F3;
+      color: #d3eafd;
+    }
+    .btn.btn-link:hover {
+      background: #0d8aee;
+      color: #deeffd;
+    }
+    .btn.btn-submit {
+      background: #7b22bf;
+      color: white;
+    }
+    .btn.btn-submit:hover {
+      background: #0d8aee;
+      color: #deeffd;
+    }
+    .btn-box {
+      text-align: center;
+    }
+
+    /* Table */
     table {
       font-family: arial, sans-serif;
       border-collapse: collapse;
@@ -14,24 +96,13 @@
       margin-bottom: 25px;
       text-align: center;
     }
-    .search {
-      text-align: center;
-      margin-top: 35px;
-    }
-    .search input {
-      height: 26px;
-      width: 200px;
-    }
-    .search button {
-      height: 32px;
-    }
     td, th {
       border: 1px solid #dddddd;
       text-align: center;
       padding: 8px;
     }
     tr:nth-child(even) {
-      background-color: #dddddd;
+      background-color: #af6ae6;
     }
     h2 {
       text-align: center;
@@ -468,12 +539,16 @@
     }
   </script>
 
-  <div class="search">
-    <button onclick="findVerb()">מצא פועל</button>
-    <input id="verb-input" placeholder=' דוגמא: מצא, ם.צ.א, צמא, צ.מ.א'>
+  <div id="search">
+    <div class="group">
+      <input id="verb-input" placeholder=' דוגמא: מצא  מ.צ.א  ץמא  צ.ם.א'/><span class="highlight"></span><span class="bar"></span>
+    </div>
+    <div class="btn-box">
+      <button class="btn btn-submit" onclick="findVerb()">מצא פועל</button>
+    </div>
   </div>
-  
-  <h2>נגזרות</h2>
+
+  <!-- <h2>נגזרות</h2> -->
   <table id="derivs">
   </table>
   <footer id="footer">© כל הזכויות שמורות לד"ר שלומית תמיר Ph.D 🧿 בראיה אחרת, אירידוסופיה ®</footer>
